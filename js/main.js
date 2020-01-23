@@ -5,5 +5,5 @@ let deposit = 300;
 let mission = "миссия";
 let period = 16;
 
-alert("Она пытается в JS");
+alert("Она пытается в дополнительный JS");
 console.log("Все еще пытается");
