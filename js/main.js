@@ -1,9 +1,9 @@
-let money = 3;
-let income = 20;
-let addExpenses = "добавить расходы";
-let deposit = 300;
-let mission = "миссия";
-let period = 16;
+let money = 3,
+income = 20,
+addExpenses = "добавить расходы",
+deposit = 300,
+mission = "миссия",
+period = 16;
 
 alert("Она пытается в дополнительный JS");
 console.log("Все еще пытается");
