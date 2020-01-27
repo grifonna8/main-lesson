@@ -1,4 +1,4 @@
-let money = 3,
+let money = 10000,
 income = 20,
 addExpenses = "добавить расходы",
 deposit = 300,
