@@ -7,8 +7,8 @@ period = 8,
 budgetDay = null,
 budgetMonth = null,
 expenses1 = prompt('Введите обязательную статью расходов?'),
-expenses2 = prompt('Введите обязательную статью расходов?'),
 amount1 = prompt('Во сколько это обойдется?'),
+expenses2 = prompt('Введите обязательную статью расходов?'),
 amount2 = prompt('Во сколько это обойдется?');
 
 console.log(typeof money);
