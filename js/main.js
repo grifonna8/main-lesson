@@ -9,6 +9,7 @@ let money,
       }
       while (!isNumber(money) || money === '');
     };
+    money = +money;
 start();
 
 let appData = { /* содержит все созданнве переменные */
