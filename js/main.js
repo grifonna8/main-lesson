@@ -63,7 +63,7 @@ let appData = { /* содержит все созданнве переменны
         cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', 10000);
       }
       while(!isNumber(cashIncome) || cashIncome === '');
-      appData.income[itemIncome] = cashIncome;
+      appData.income[itemIncome] = +cashIncome;
     }
 
     let answer = 0,
@@ -79,12 +79,12 @@ let appData = { /* содержит все созданнве переменны
       do{
           expenses1 = prompt('Введите обязательную статью расходов');
         }
-        while(isNumber(expenses1) || expenses1 === '');
+      while(isNumber(expenses1) || expenses1 === '');
       do {
         answer = prompt('Во сколько это обойдется?');
       }
       while (!isNumber(answer) || answer === '');
-      appData.expenses[expenses1] = answer;
+      appData.expenses[expenses1] = +answer;
     } 
   },
   getExpensesMonth: function(){ /* сумма всех трат */
