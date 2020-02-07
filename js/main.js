@@ -5,9 +5,9 @@ let isNumber = function(n){
 let money,
     start = function(){
       do{
-        money = +prompt('Ваш месячный доход?');
+        money = prompt('Ваш месячный доход?');
       }
-      while (!isNumber(money));
+      while (!isNumber(money) || money === '');
     };
 start();
 
