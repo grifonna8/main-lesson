@@ -20,10 +20,19 @@ let count = document.getElementById('start'),
     depositAmount = document.querySelector('.deposit-amount'),
     depositPercent = document.querySelector('.deposit-percent'),
     target = document.querySelector('.target-amount'),
-    period = document.querySelector('[type="range"]');
+    period = document.querySelector('[type="range"]'),
+    values1, values2, values3, values4, values5, values6, values7;
 
 
 values = results.querySelectorAll('[class*="-value"]');
+values1 = values[0];
+values2 = values[1];
+values3 = values[2];
+values4 = values[3];
+values5 = values[4];
+values6 = values[5];
+values7 = values[6];
+
 
 console.log(count);
 console.log(button1);
@@ -32,7 +41,6 @@ console.log(checkBox);
 console.log(input1);
 console.log(input2);
 console.log(results);
-console.log(values);
 console.log(salary);
 console.log(income1);
 console.log(income2);
@@ -46,4 +54,11 @@ console.log(depositAmount);
 console.log(depositPercent);
 console.log(target);
 console.log(period);
+console.log(values1);
+console.log(values2);
+console.log(values3);
+console.log(values4);
+console.log(values5);
+console.log(values6);
+console.log(values7);
 
