@@ -38,5 +38,9 @@ console.log(bookItem);
 console.log(liItem1);
 console.log(liItem2);
 console.log(liItem3);
-heading.insertAdjacentHTML('beforebegin', '<h2><a href="https://github.com/azat-io/you-dont-know-js-ru/blob/master/this%20%26%20object%20prototypes/README.md#you-dont-know-js-this--object-prototypes" target="_blank">Книга 3. this и Прототипы Объектов</a></h2>');
+/* разбила элемент на части, иначе ругается на длинную строчку и все, что после него, выполняться не будет */
+let a = '<h2><a href="https://github.com/azat-io/you-dont-know-js-ru/blob/master/this',
+    b = '%20%26%20object%20prototypes/README.md#you-dont-know-js-this--object-prototypes" target="_blank">',
+    c = 'Книга 3. this и Прототипы Объектов</a></h2>';
+heading.insertAdjacentHTML('beforebegin', a + b + c);
 heading.remove();
