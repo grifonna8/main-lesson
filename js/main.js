@@ -47,7 +47,6 @@ let appData = { /* содержит все созданнве переменны
   start: function(){
 
     appData.budget = +salaryAmount.value;
-    console.log('salaryAmount.value: ', salaryAmount.value);
 
     appData.getExpenses();
     appData.getIncome();
@@ -66,8 +65,9 @@ let appData = { /* содержит все созданнве переменны
     expensesMonthValue.value = appData.expensesMonth;
     additionalExpensesValue.value = appData.addExpenses.join(', ');
     additionalIncomeValue.value = appData.addIncome.join(', ');
-    // incomePeriodValue.value = periodSelect.addEventListener('input', appData.calcSavedMoney);
     incomePeriodValue.value = appData.calcSavedMoney();
+    periodSelect.addEventListener('input', appData.calcChangedSavedMoney);
+    
     targetMonthValue.value = appData.accumulatedMonth;
   },
   addExpensesBlock: function(){
@@ -87,10 +87,10 @@ let appData = { /* содержит все созданнве переменны
     }
   },
   getBudget: function (){
+    appData.budgetMonth = appData.budget - appData.expensesMonth;
     for (let key in appData.income){
       appData.income[key] = +appData.income[key];
-    appData.budgetMonth = appData.budget + appData.income[key] - appData.expensesMonth;
-    // appData.incomeMonth добавляла еще наверзу, но что это значит не ясно
+      appData.budgetMonth = appData.budgetMonth + appData.income[key];
     }
     appData.budgetDay = Math.floor(appData.budgetMonth / 30);
   },
@@ -182,6 +182,9 @@ let appData = { /* содержит все созданнве переменны
   },
   calcSavedMoney: function(){
     return appData.budgetMonth * periodSelect.value;
+  },
+  calcChangedSavedMoney: function(){
+    incomePeriodValue.value = appData.budgetMonth * periodSelect.value;
   }
 };
 salaryAmount.addEventListener('blur', appData.case);
@@ -199,7 +202,5 @@ for (item of appData.addExpenses){
   addExpensesStr = addExpensesStr + item + ', ';
 }
 
-console.log(addExpensesStr.slice(0, addExpensesStr.length - 2));
 
 appData.getInfoDeposit();
-console.log(appData.percentDeposit, appData.moneyDeposit, appData.calcSavedMoney());
