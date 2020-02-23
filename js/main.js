@@ -23,6 +23,9 @@ let start = document.getElementById('start'),
     periodSelect = document.querySelector('.period-select'),
     incomePeriodValue = document.querySelector('.income_period-value'),
     periodAmount = document.querySelector('.period-amount'),
+    depositCheck = document.querySelector('#deposit-check'),
+    depositAmount = document.querySelector('.deposit-amount'),
+    depositPercent = document.querySelector('.deposit-percent'),
     resetButton = document.querySelector('#cancel'),
     elemType = document.querySelectorAll('input'),
     dataBlock = document.querySelector('.data');
@@ -61,9 +64,26 @@ let appData = { /* содержит все созданные переменны
     });
     start.style.display='none';
     resetButton.style.display='initial';
-    resetButton.addEventListener('click', this.reset);
+    resetButton.addEventListener('click', this.reset.bind(this));
   },
   reset: function(){
+    this.income = {};
+    this.addIncome = []; /* доп доходы */
+    this.expenses = {};
+    this.addExpenses = []; /* массив с возможными расходами */
+    this.addExpensesNew = [];
+    this.deposit = false;
+    this.percentDeposit = 0;
+    this.moneyDeposit = 0;
+    this.budget = 0;
+    this.incomeMonth = 0;
+    this.budgetDay = 0;
+    this.budgetMonth = 0;
+    this.expensesMonth = 0;
+    this.accumulatedMonth = 0;
+    if (depositCheck.checked){
+      depositCheck.checked = false;
+    }
     elemType.forEach(function(item){
       item.value = '';
       item.removeAttribute('disabled', 'disabled');
@@ -88,6 +108,10 @@ let appData = { /* содержит все созданные переменны
     } else if (expensesItems.length === 2){
       expensesItems[1].remove();
     }
+    this.periodChange();
+    depositAmount.style.display = 'none';
+    depositPercent.style.display = 'none';
+    start.disabled = true;
   },
   showResult: function(){
     budgetDayValue.value = this.budgetDay;
@@ -201,9 +225,7 @@ let appData = { /* содержит все созданные переменны
     return this.budgetMonth * periodSelect.value;
   },
   calcChangedSavedMoney: function(){
-  // нельзя с this, дает саму шкалу с ползунком
     incomePeriodValue.value = this.budgetMonth * periodSelect.value;
-    console.log(this);
   }
 };
 start.disabled = true;
