@@ -100,6 +100,7 @@ let appData = { /* содержит все созданные переменны
       incomePlus.style.display = 'initial';
     } else if (incomeItems.length === 2){
       incomeItems[1].remove();
+      incomePlus.style.display = 'initial';
     }
     if (expensesItems.length === 3){
       expensesItems[1].remove();
@@ -107,7 +108,10 @@ let appData = { /* содержит все созданные переменны
       expensesPlus.style.display = 'initial';
     } else if (expensesItems.length === 2){
       expensesItems[1].remove();
+      expensesPlus.style.display = 'initial';
     }
+    expensesItems = document.querySelectorAll('.expenses-items');
+    incomeItems = document.querySelectorAll('.income-items');
     this.periodChange();
     depositAmount.style.display = 'none';
     depositPercent.style.display = 'none';
