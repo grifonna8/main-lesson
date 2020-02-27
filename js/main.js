@@ -240,18 +240,18 @@ AppData.prototype.eventListeners = function(){
   expensesPlus.addEventListener('click', this.addExpensesBlock);
   incomePlus.addEventListener('click', this.addIncomeBlock);
   periodSelect.addEventListener('input', this.periodChange);
+  start.disabled = true;
+  let checking = function(){
+    if (salaryAmount.value === '' && !isNumber(salaryAmount.value)){
+      start.disabled = true;
+    } else {
+      start.disabled = false;
+    }
+  };
+  salaryAmount.addEventListener('input', checking);
+  appData.getTargetMonth();
+  appData.getInfoDeposit();
 };
 const appData = new AppData();
 appData.eventListeners();
 
-start.disabled = true;
-let checking = function(){
-  if (salaryAmount.value === '' && !isNumber(salaryAmount.value)){
-    start.disabled = true;
-  } else {
-    start.disabled = false;
-  }
-};
-salaryAmount.addEventListener('input', checking);
-appData.getTargetMonth();
-appData.getInfoDeposit();
