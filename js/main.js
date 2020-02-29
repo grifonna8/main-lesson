@@ -153,7 +153,7 @@ class AppData {
     }
   }
   getBudget(){
-    const monthDeposit = this.moneyDeposit * (this.percentDeposit / 100);
+    const monthDeposit = Math.floor(this.moneyDeposit * (this.percentDeposit / 100));
     this.budgetMonth = this.budget - this.expensesMonth + monthDeposit;
     for (let key in this.income){
       this.income[key] = +this.income[key];
@@ -229,7 +229,7 @@ class AppData {
     }
   }
   calcSavedMoney(){
-    return this.budgetMonth * periodSelect.value;
+    return Math.floor(this.budgetMonth * periodSelect.value);
   }
   calcChangedSavedMoney(){
     incomePeriodValue.value = this.budgetMonth * periodSelect.value;
@@ -239,21 +239,10 @@ class AppData {
     console.log(valueSelect);
     if(valueSelect === 'other'){
       depositPercent.style.display = 'inline-block';
-      depositPercent.addEventListener('change', appData.depositPercentCheck.bind(appData));
     } else {
       depositPercent.value = valueSelect;
     }
     
-  }
-  depositPercentCheck(){
-    if (!isNumber(depositPercent.value) || depositPercent.value === '' || depositPercent.value <= 0 ||
-     depositPercent.value >= 100){
-      alert ("Введите корректное значение в поле проценты");
-      start.disabled = true;
-    } else {
-      start.disabled = false;
-    }
-    start.disabled = false;
   }
   depositHandler(){
     if(depositCheck.checked){
@@ -273,7 +262,18 @@ class AppData {
     }
   }
   eventListeners(){
-    start.addEventListener('click', this.start.bind(this));
+    const checkPercentAmount = () => {
+      if (depositBank.value === 'other' && 
+      (!isNumber(depositPercent.value) || depositPercent.value === '' ||
+          depositPercent.value <= 0 || depositPercent.value >= 100) || depositAmount.value === ''){
+        alert ("Введите корректное значение в поле проценты или сумму вклада");
+      } else if (depositBank.value === '' && depositAmount.value === ''){
+        alert ("Выберите банк");
+      } else if (depositAmount.value !== ''){
+        this.start();
+      }
+    };
+    start.addEventListener('click', checkPercentAmount.bind(appData));
     expensesPlus.addEventListener('click', this.addExpensesBlock);
     incomePlus.addEventListener('click', this.addIncomeBlock);
     periodSelect.addEventListener('input', this.periodChange);
