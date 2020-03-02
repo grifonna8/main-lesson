@@ -47,11 +47,14 @@ document.addEventListener('DOMContentLoaded', function(){
           seconds = Math.floor(timeRemaining % 60),
           minutes = Math.floor((timeRemaining / 60) % 60),
           hours = Math.floor(timeRemaining / 60 / 60);
-        return {timeRemaining, hours, minutes, seconds};
+      return {timeRemaining, hours, minutes, seconds};
     }
+    let timer = getTimeRemaining();
 
+    function timeCheck(){
+      timer = getTimeRemaining();
+    } 
     function updateClock(){
-      let timer = getTimeRemaining();
       if (timer.hours >= 0 && timer.hours <=9){
         timerHours.textContent = '0' + timer.hours;
       } else {
@@ -67,22 +70,21 @@ document.addEventListener('DOMContentLoaded', function(){
       } else {
         timerSeconds.textContent = timer.seconds;
       }
-      
-
-      if(timer.timeRemaining > 0){
-        setInterval(updateClock, 1000);
-      } else {
-        timerHours.textContent = '00';
-        timerMinutes.textContent = '00';
-        timerSeconds.textContent = '00';
-      }
-      
+      timeCheck();
     }
 
-    updateClock();
+
+    if(timer.timeRemaining > 0){
+      setInterval(updateClock, 1000);
+    } else {
+      clearInterval(setInterval(updateClock, 1000));
+      timerHours.textContent = '00';
+      timerMinutes.textContent = '00';
+      timerSeconds.textContent = '00';
+    }
   }
 
-  setInterval(countTimer, 1000, '03 march 2020');
+  countTimer('03 march 2020');
 
 
 });
