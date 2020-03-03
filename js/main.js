@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function(){
   function countTimer(deadline){
     let timerHours = document.querySelector('#timer-hours'),
         timerMinutes = document.querySelector('#timer-minutes'),
-        timerSeconds = document.querySelector('#timer-seconds');
-
+        timerSeconds = document.querySelector('#timer-seconds'),
+        timer, idInterval;
     function getTimeRemaining(){
       let dateStop = new Date(deadline).getTime(),
           dateNow = new Date().getTime(),
@@ -49,12 +49,12 @@ document.addEventListener('DOMContentLoaded', function(){
           hours = Math.floor(timeRemaining / 60 / 60);
       return {timeRemaining, hours, minutes, seconds};
     }
-    let timer = getTimeRemaining();
 
     function timeCheck(){
       timer = getTimeRemaining();
     } 
     function updateClock(){
+      timeCheck();
       if (timer.hours >= 0 && timer.hours <=9){
         timerHours.textContent = '0' + timer.hours;
       } else {
@@ -70,20 +70,23 @@ document.addEventListener('DOMContentLoaded', function(){
       } else {
         timerSeconds.textContent = timer.seconds;
       }
-      timeCheck();
+      if (timer.timeRemaining <= 0){
+        clearInterval(idInterval);
+        timerHours.textContent = '00';
+        timerMinutes.textContent = '00';
+        timerSeconds.textContent = '00';
+      }
     }
 
-
+    updateClock();
     if(timer.timeRemaining > 0){
-      setInterval(updateClock, 1000);
+      idInterval = setInterval(updateClock, 1000);
     } else {
-      clearInterval(setInterval(updateClock, 1000));
       timerHours.textContent = '00';
       timerMinutes.textContent = '00';
       timerSeconds.textContent = '00';
     }
   }
-
   countTimer('03 march 2020');
 
 
